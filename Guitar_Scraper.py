@@ -3,12 +3,13 @@ from bs4 import BeautifulSoup
 import re
 
 # Scraping thomann homepage for guitar information and storing it in a list
-class Guitar_crawl:
+class crawler:
     
-    def __init__(self):
+    def __init__(self, name):
         self.guitar_manufacturer_list = []
         self.guitar_model_list = []
         self.guitar_price_list = []
+        self.name = name
         # guitar_html = requests.get(self.url).text
         # guitar_soup = BeautifulSoup(guitar_html, "html.parser")
 
@@ -17,9 +18,6 @@ class Guitar_crawl:
     def fetch_data(self,url):
         self.url = url
         
-        # guitar_html_start = requests.get(self.url).text
-        # guitar_soup_start = BeautifulSoup(guitar_html_start, "html.parser")
-        # next_button = guitar_soup_start.find("a",{"class": "button next"})["href"]
         
         next_button = "start"
         while len(next_button)>1:
@@ -42,7 +40,7 @@ class Guitar_crawl:
                 
                     except AttributeError:
                         print("Wrong Div Container from HTML")
-                #print(self.guitar_manufacturer_list)
+                
 
 
             #Model from Webside 
@@ -91,10 +89,11 @@ class Guitar_crawl:
 
 
         
-guitar = Guitar_crawl()
+guitar = crawler("Guitars")
+bass = crawler("Basses")
 
-guitar.fetch_data("https://www.thomann.de/de/st-modelle.html?pg=2&ls=100")
-    
+guitar.fetch_data("https://www.thomann.de/de/st-modelle.html?ls=100")
+bass.fetch_data("https://www.thomann.de/de/4-saiter_j-baesse.html?ls=100")
 
 
 

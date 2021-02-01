@@ -1,8 +1,10 @@
 import pandas as pd 
 from Guitar_Scraper import *
+import csv
 
-class Guitar_to_CSV:
+class Instrument_to_CSV:
     def __init__(self, Instrument):
+        self.name = Instrument.name
         self.price_list= Instrument.guitar_price_list   #wrong - need omni list for all classes: Guitar, Drums, Bass, etc but HOW
         self.model_list = Instrument.guitar_model_list
         self.manufacturer_list = Instrument.guitar_manufacturer_list
@@ -20,7 +22,11 @@ class Guitar_to_CSV:
         
 
     
-        self.instrument_df.to_csv("Instrument_Table.csv")
+        self.instrument_df.to_csv(self.name + "_Table.csv", encoding='utf-8')
+        
+        
+
+
 
     def __str__(self):
         return str(self.instrument_df)
@@ -28,7 +34,9 @@ class Guitar_to_CSV:
 
 
 
-Guitars= Guitar_to_CSV(guitar)
+Guitars= Instrument_to_CSV(guitar)
+Basses = Instrument_to_CSV(bass)
 print("Copying to CSV...")
 Guitars.list_to_csv()
-print(Guitars)
+Basses.list_to_csv()
+
